@@ -1,0 +1,99 @@
+<!--
+    表格
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<!--添加id选择器-->
+<div id="app">
+    <!--
+    添加组件
+        el-table 表格组件
+        :data="tableData"：v-bind缩写  将tableData数据绑定到el-table
+        prop="date":返回的数据名称 要 prop名称要一致
+    -->
+
+    <el-table
+            :data="tableData"
+            style="width: 100%"
+            :row-class-name="tableRowClassName">
+        <el-table-column
+                prop="date"
+                label="日期"
+                width="180">
+        </el-table-column>
+        <el-table-column
+                prop="name"
+                label="姓名"
+                width="180">
+        </el-table-column>
+        <el-table-column
+                prop="address"
+                label="地址">
+        </el-table-column>
+    </el-table>
+</div>
+</body>
+
+<script>
+    /*
+        1，添加vue对象
+        2，绑定id选择器，创建data
+    */
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                //相当于返回List<T>  发送请求 从后台得到List<T>数据 赋值给table组件
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }]
+            }
+        },
+        methods: {
+            tableRowClassName({row, rowIndex}) {
+                if (rowIndex === 1) {
+                    return 'warning-row';
+                } else if (rowIndex === 3) {
+                    return 'success-row';
+                }
+                return '';
+            }
+        }
+    })
+</script>
+
+<!--css-->
+<style>
+    .el-table .warning-row {
+        background: oldlace;
+    }
+
+    .el-table .success-row {
+        background: #f0f9eb;
+    }
+</style>
+</html>
